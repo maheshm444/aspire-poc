@@ -63,7 +63,7 @@ const DebitCard = () => {
           <View style={tw`flex flex-row justify-around items-center`}>
             <View>
               <Entypo
-                name={'eye'}
+                name={'eye-with-line'}
                 size={15}
                 color={theme.primary}
                 style={tw`mr-5`}
@@ -79,7 +79,7 @@ const DebitCard = () => {
           <View style={tw`flex flex-row justify-around items-center`}>
             <View>
               <Entypo
-                name={'eye-with-line'}
+                name={'eye'}
                 size={15}
                 color={theme.primary}
                 style={tw`mr-5`}

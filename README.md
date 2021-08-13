@@ -21,7 +21,7 @@ Screens of the Application
 * [Credit Card](https://ibb.co/zFw9Qbm)
 * [Payments](https://ibb.co/dr41BMZ)
 
-The [Product Demo](https://www.loom.com/share/22488ef2b08c49b1ba622f6df742b54a) could be seen here.
+The [Product Demo](https://www.loom.com/share/4348c2d1c2f3434480ad316172ae24d4) could be seen here.
 
 The Tools or Libraries applied in this project are
 * React Native

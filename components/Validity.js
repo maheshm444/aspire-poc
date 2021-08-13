@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import tw from 'tailwind-react-native-classnames'
 
-const Validity = ({ thru, cvv }) => {
+const Validity = ({ thru, cvv, showCardNumber }) => {
   return (
     <View style={tw`flex flex-row justify-between w-44`}>
       <View>
@@ -12,7 +12,7 @@ const Validity = ({ thru, cvv }) => {
       </View>
       <View>
         <Text style={tw`text-white text-sm font-normal tracking-wide`}>
-          CVV: {cvv}
+          CVV: {showCardNumber ? cvv : '***'}
         </Text>
       </View>
     </View>

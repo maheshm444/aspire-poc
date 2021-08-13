@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import tw from 'tailwind-react-native-classnames'
 import MainRow from '../components/MainRow'
 import CardNumber from '../components/CardNumber'
 import Validity from '../components/Validity'
 import CardUser from '../components/CardUser'
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  StatusBar,
+  Pressable,
+} from 'react-native'
 import { useSelector } from 'react-redux'
 import favImage from '../assets/fav.png'
+import favWhiteImage from '../assets/fav-white.png'
 import { ProgressBar } from 'react-native-paper'
 import { Image } from 'react-native'
 import theme from '../common/colorTheme'
+import { Entypo } from '@expo/vector-icons'
 
 const DebitCard = () => {
+  const [showCardNumber, setShowCardNumber] = useState(false)
   const { isCreditLimitSet } = useSelector((state) => state.payment)
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
   return (
@@ -34,28 +44,77 @@ const DebitCard = () => {
             { backgroundColor: theme.primary },
           ]}
         >
-          <Text style={tw`text-white text-sm font-bold`}>SS</Text>
+          <Text style={tw`text-white text-sm font-bold tracking-wide `}>
+            S$
+          </Text>
         </View>
         <View style={tw`flex px-3`}>
           <Text style={tw`text-white text-3xl font-bold`}>3,000</Text>
         </View>
       </View>
 
+      <Pressable
+        style={tw`flex items-center justify-center ml-48 mr-5 bg-white h-9 rounded-t-lg`}
+        onPress={() =>
+          showCardNumber ? setShowCardNumber(false) : setShowCardNumber(true)
+        }
+      >
+        {showCardNumber ? (
+          <View style={tw`flex flex-row justify-around items-center`}>
+            <View>
+              <Entypo
+                name={'eye'}
+                size={15}
+                color={theme.primary}
+                style={tw`mr-5`}
+              />
+            </View>
+            <View>
+              <Text style={[tw`text-sm font-bold`, { color: theme.primary }]}>
+                Hide card Number
+              </Text>
+            </View>
+          </View>
+        ) : (
+          <View style={tw`flex flex-row justify-around items-center`}>
+            <View>
+              <Entypo
+                name={'eye-with-line'}
+                size={15}
+                color={theme.primary}
+                style={tw`mr-5`}
+              />
+            </View>
+            <View>
+              <Text style={[tw`text-sm font-bold`, { color: theme.primary }]}>
+                Show card Number
+              </Text>
+            </View>
+          </View>
+        )}
+      </Pressable>
       <View
         style={[
-          tw`flex bg-purple-600 overflow-visible h-56 w-11/12 z-50 absolute my-48 mx-4 rounded-xl items-center`,
+          tw`flex bg-purple-600 overflow-visible h-56 w-11/12 z-50 absolute my-52 mx-4 rounded-xl items-center`,
           { backgroundColor: theme.primary },
         ]}
       >
-        <View style={tw`self-end mr-7 mt-4`}>
+        <View style={tw`self-end flex flex-row mr-7 mt-4`}>
+          <Image
+            source={favWhiteImage}
+            style={[tw`h-7 w-7 mr-2`, { resizeMode: 'contain' }]}
+          />
           <Text style={tw`text-white text-lg font-medium tracking-wide`}>
             aspire
           </Text>
         </View>
         <View style={tw`self-start ml-5 my-3`}>
           <CardUser username={'Mark Henry'} />
-          <CardNumber numbers={['5467', '3411', '2413', '2020']} />
-          <Validity thru='12/20' cvv='456' />
+          <CardNumber
+            numbers={['5467', '3411', '2413', '2020']}
+            showCardNumber={showCardNumber}
+          />
+          <Validity thru='12/20' cvv='456' showCardNumber={showCardNumber} />
         </View>
         <View style={tw`self-end mr-7`}>
           <View>
@@ -80,7 +139,9 @@ const DebitCard = () => {
                   <Text style={tw`text-sm`}>Debit card spending limit</Text>
                 </View>
                 <View style={tw`flex flex-row`}>
-                  <Text style={[tw`text-sm font-bold`, { color: theme.primary }]}>
+                  <Text
+                    style={[tw`text-sm font-bold`, { color: theme.primary }]}
+                  >
                     $345 |{' '}
                   </Text>
                   <Text style={tw`text-sm font-bold text-gray-400`}>
